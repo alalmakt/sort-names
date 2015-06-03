@@ -11,11 +11,29 @@ namespace sort_names
     {
         static void Main(string[] args)
         {
-            var path = args[0] as string;
+            try
+            {
+                var path = args[0] as string;
 
-            var nameReader = new NameReader(path);
-            
-            Console.ReadLine();
+                var nameReader = new NameReader(path);
+
+                var readNamesTask = nameReader.ReadNamesAsync();
+
+                var names = readNamesTask.Result;
+
+                var sortedNames = names.GroupBy(n => new { n.LastName, n.FirstName }).ToList();
+
+                //print lines
+
+      //     Console.ReadLine();
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        
+
+           
         }
     }
 }

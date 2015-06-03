@@ -39,9 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="INameWriter.cs" />
     <Compile Include="INameReader.cs" />
     <Compile Include="Name.cs" />
+    <Compile Include="FileReader.cs" />
     <Compile Include="NameReader.cs" />
+    <Compile Include="NameWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

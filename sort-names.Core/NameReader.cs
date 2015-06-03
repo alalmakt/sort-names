@@ -7,25 +7,18 @@ using System.Threading.Tasks;
 
 namespace sort_names.Core
 {
-    public class NameReader : INameReader
+    public class NameReader : FileAccessor, INameReader
     {
-        private string _path;
-
         public NameReader(string path)
+            : base(path)
         {
-
-            if (string.IsNullOrWhiteSpace(path)) throw new ArgumentNullException("path");
-
-            if (!File.Exists(path)) throw new ArgumentException("path");
-
-            _path = path;
         }
 
         public async Task<List<Name>> ReadNamesAsync()
         {
             var list = new List<Name>();
 
-            using (var nameStreamReader = new StreamReader(_path))
+            using (var nameStreamReader = new StreamReader(Path))
             {
                 while (nameStreamReader.Peek() >= 0)
                 {
@@ -38,7 +31,7 @@ namespace sort_names.Core
             return list;
         }
 
-        public Name GetNameFromLine(string line)
+        private Name GetNameFromLine(string line)
         {
             var name = new Name();
 
