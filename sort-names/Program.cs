@@ -1,4 +1,5 @@
-﻿using sort_names.Core;
+﻿using System.IO;
+using sort_names.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,27 +14,35 @@ namespace sort_names
         {
             try
             {
-                var path = args[0] as string;
+                var path = args[0];
 
-                var nameReader = new NameReader(path);
+                var names = ReadNamesFromFile(path);
 
-                var readNamesTask = nameReader.ReadNamesAsync();
+                var sortedNames = names.OrderBy(n => new { n.LastName, n.FirstName }).ToList();
 
-                var names = readNamesTask.Result;
+                //save lines
+                var sortedFileName = Path.GetFileName(path);
+                var nameWriter = new NameWriter(String.Format("{0}", sortedFileName));
 
-                var sortedNames = names.GroupBy(n => new { n.LastName, n.FirstName }).ToList();
+                var writeNamesTask = nameWriter.WriteNamesToFileAsync(sortedNames);
 
-                //print lines
-
-      //     Console.ReadLine();
+                writeNamesTask.Wait();
             }
             catch (Exception e)
             {
                 throw;
             }
-        
-
-           
         }
+
+        private static IEnumerable<Name> ReadNamesFromFile(string path)
+        {
+            var nameReader = new NameReader(path);
+
+            var readNamesTask = nameReader.ReadNamesAsync();
+
+            var names = readNamesTask.Result;
+
+            return names;
+        } 
     }
 }

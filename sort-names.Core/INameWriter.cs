@@ -8,6 +8,6 @@ namespace sort_names.Core
 {
     public interface INameWriter
     {
-        void WriteNamesToFile(IList<Name> names);
+        Task WriteNamesToFileAsync(IEnumerable<Name> names);
     }
 }

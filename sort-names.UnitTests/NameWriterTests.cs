@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sort_names.Core
+namespace sort_names.UnitTests
 {
-    public interface INameReader
+    public class NameWriterTests
     {
-        Task<IEnumerable<Name>> ReadNamesAsync();
     }
 }

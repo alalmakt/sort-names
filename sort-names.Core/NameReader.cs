@@ -14,7 +14,7 @@ namespace sort_names.Core
         {
         }
 
-        public async Task<List<Name>> ReadNamesAsync()
+        public async Task<IEnumerable<Name>> ReadNamesAsync()
         {
             var list = new List<Name>();
 
